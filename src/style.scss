@@ -1,0 +1,112 @@
+gh-avatar-webcomponent {
+
+    &.medium {
+        .gh-avatar {
+            flex-direction: row;
+            gap: 10px;
+
+            .user_name {
+                margin: 0;
+            }
+
+            img {
+                width: 32px;
+                height: 32px;
+            }
+            
+            &_wrapper {
+                width: 32px;
+                height: 32px;
+                span {
+                    font-size: 20px;
+                }
+            }
+        }
+    }
+
+    &.small {
+        .gh-avatar {
+            flex-direction: row;
+            gap: 10px;
+
+            .user_name {
+                margin: 0;
+            }
+            
+            img {
+                width: 24px;
+                height: 24px;
+            }
+            
+            &_wrapper {
+                width: 24px;
+                height: 24px;
+                span {
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+
+    .gh-avatar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        img {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        &_wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            position: relative;
+
+            &.bg-black {
+                background: #575757;
+            }
+
+            &.bg-red {
+                background: #FF3333;
+            }
+
+            &.bg-blue {
+                background: #0d99ff;
+            }
+
+            &.bg-green {
+                background: #10cfbd;
+            }
+
+            &.bg-gray {
+                background: #d9d9d9;
+            }
+
+            &.bg-yellow {
+                background: #ffea00;
+            }
+            
+            span {
+                font-size: 30px;
+                font-weight: 400;
+                color: #fff;
+                text-transform: uppercase;
+            }
+        }
+
+        .user_name {
+            font-size: 14px;
+            font-weight: 400;
+            margin-top: 5px;
+            display: block;
+        }
+    }
+}
