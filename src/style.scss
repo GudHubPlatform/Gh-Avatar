@@ -7,6 +7,7 @@ gh-avatar-webcomponent {
 
             .user_name {
                 margin: 0;
+                width: max-content;
             }
 
             img {
@@ -19,7 +20,6 @@ gh-avatar-webcomponent {
                 height: 32px;
                 min-width: 32px;
                 span {
-                    width: max-content;
                     font-size: 20px;
                 }
             }
@@ -33,6 +33,7 @@ gh-avatar-webcomponent {
 
             .user_name {
                 margin: 0;
+                width: max-content;
             }
             
             img {
@@ -45,7 +46,6 @@ gh-avatar-webcomponent {
                 height: 24px;
                 min-width: 24px;
                 span {
-                    width: max-content;
                     font-size: 14px;
                 }
             }
