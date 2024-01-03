@@ -17,6 +17,7 @@ gh-avatar-webcomponent {
             &_wrapper {
                 width: 32px;
                 height: 32px;
+                min-width: 32px;
                 span {
                     font-size: 20px;
                 }
@@ -41,6 +42,7 @@ gh-avatar-webcomponent {
             &_wrapper {
                 width: 24px;
                 height: 24px;
+                min-width: 24px;
                 span {
                     font-size: 14px;
                 }

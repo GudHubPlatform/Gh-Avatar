@@ -1,14 +1,15 @@
 <div class="gh-avatar">
-    ${ url ? 
-        `<div class="gh-avatar_wrapper ${bgClass}">
-            <span>${
-                name.indexOf(' ') > 0 ?
-                name.charAt(0) + name.charAt(name.indexOf(' ') + 1) : 
-                name.charAt(0) + name.charAt(name.length - 1)}
-            </span>
-            <img src="${url}" alt="${name}"/>
-        </div>` :
-        ``
-    }
+    <div class="gh-avatar_wrapper ${bgClass}">
+        <span>${
+            name.indexOf(' ') > 0 ?
+            name.charAt(0) + name.charAt(name.indexOf(' ') + 1) : 
+            name.charAt(0) + name.charAt(name.length - 1)}
+        </span>
+        ${ url ? 
+            `<img src="${url}" alt="${name}"/>` : 
+            ``;
+        }
+        
+    </div>
     ${ isRenderName ? `<span class="user_name"> ${name} </span>` : ``}
 </div>
