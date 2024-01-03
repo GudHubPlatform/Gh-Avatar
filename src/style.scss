@@ -2,7 +2,9 @@ gh-avatar-webcomponent {
 
     &.medium {
         .gh-avatar {
+            display: flex;
             flex-direction: row;
+            width: auto;
             gap: 10px;
 
             .user_name {
@@ -28,7 +30,9 @@ gh-avatar-webcomponent {
 
     &.small {
         .gh-avatar {
+            display: flex;
             flex-direction: row;
+            width: auto;
             gap: 10px;
 
             .user_name {
@@ -53,9 +57,10 @@ gh-avatar-webcomponent {
     }
 
     .gh-avatar {
-        display: flex;
+        display: block;
         flex-direction: column;
         align-items: center;
+        width: 80px;
         img {
             width: 64px;
             height: 64px;
@@ -111,6 +116,9 @@ gh-avatar-webcomponent {
             font-weight: 400;
             margin-top: 5px;
             display: block;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden
         }
     }
 }
