@@ -17,6 +17,13 @@ class GhAvatar extends GhHtmlElement {
     async onInit() {
         await this.getAttributes();
 
+        if(!this.model || !this.model.data_model.images_field_id) {
+            const iconsStorage = gudhub.ghconstructor.angularInjector.get('iconsStorage');
+            const svg = iconsStorage.getIcon("user", "a0a7ad", "40px");
+            super.render(svg);
+            return;
+        }
+
         await this.getAvatar();
         
         super.render(html);
