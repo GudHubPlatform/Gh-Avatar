@@ -11,6 +11,7 @@ class GhAvatar extends GhHtmlElement {
         this.fieldId;
         this.itemId;
         this.url;
+        this.name;
         this.bgClass;
     }
 
@@ -18,9 +19,19 @@ class GhAvatar extends GhHtmlElement {
         await this.getAttributes();
 
         if(!this.model || !this.model.data_model.images_field_id) {
-            const iconsStorage = gudhub.ghconstructor.angularInjector.get('iconsStorage');
-            const svg = iconsStorage.getIcon("user", "a0a7ad", "40px");
-            super.render(svg);
+            
+            this.url = this.getAttribute('url');
+            this.name = this.getAttribute('name');
+
+            if(this.url && this.name) {
+                this.generateClassForName();
+                super.render(html);
+            } else {
+                const iconsStorage = gudhub.ghconstructor.angularInjector.get('iconsStorage');
+                const svg = iconsStorage.getIcon("user", "a0a7ad", "40px");
+                super.render(svg);
+            }
+
             return;
         }
 
@@ -30,9 +41,9 @@ class GhAvatar extends GhHtmlElement {
     }
 
     async getAttributes () {
-        this.appId = this.getAttribute('app-id');
-        this.itemId = this.getAttribute('item-id');
-        this.fieldId = this.getAttribute('field-id');
+        this.appId = this.getAttribute('app-id') || this.scope.appId;
+        this.itemId = this.getAttribute('item-id') || this.scope.itemId;
+        this.fieldId = this.getAttribute('field-id') || this.scope.fieldId;
         if(this.appId && this.fieldId) {
             this.model = await gudhub.getField(this.appId, this.fieldId);
         }
@@ -55,15 +66,19 @@ class GhAvatar extends GhHtmlElement {
             }
 
             this.name = await gudhub.getInterpretationById(this.appId, this.itemId, this.model.data_model.user_name_field_id, "value");
-            const colors = ['red', 'green', 'blue', 'yellow', 'black', 'gray'];
-            let nameHashCode = 0;
-
-            for (let i = 0; i < this.name.length; i++) {
-                nameHashCode += this.name.charCodeAt(i) * Math.pow(31, i % this.name.length)
-            };
-
-            this.bgClass = `bg-${colors[Math.abs((nameHashCode % colors.length))]}`;
+            this.generateClassForName();
         }
+    }
+
+    generateClassForName() {
+        const colors = ['red', 'green', 'blue', 'yellow', 'black', 'gray'];
+        let nameHashCode = 0;
+
+        for (let i = 0; i < this.name.length; i++) {
+            nameHashCode += this.name.charCodeAt(i) * Math.pow(31, i % this.name.length);
+        };
+
+        this.bgClass = `bg-${colors[Math.abs((nameHashCode % colors.length))]}`;
     }
 }
 

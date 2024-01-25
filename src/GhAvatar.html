@@ -5,7 +5,8 @@
             name.charAt(0) + name.charAt(name.indexOf(' ') + 1) : 
             name.charAt(0) + name.charAt(name.length - 1)}
         </span>
-        ${ url ? 
+        
+        ${ url && url !== 'undefined' ? 
             `<img src="${url}" alt="${name}"/>` : 
             ``
         }
