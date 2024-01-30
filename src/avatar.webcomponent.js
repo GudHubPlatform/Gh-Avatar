@@ -11,7 +11,7 @@ class GhAvatar extends GhHtmlElement {
         this.fieldId;
         this.itemId;
         this.url;
-        this.name;
+        this.name = '';
         this.bgClass = '';
     }
 
