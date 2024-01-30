@@ -12,7 +12,7 @@ class GhAvatar extends GhHtmlElement {
         this.itemId;
         this.url;
         this.name;
-        this.bgClass;
+        this.bgClass = '';
     }
 
     async imageFieldUpdate(event, value) {
