@@ -43,17 +43,17 @@ export default class GhAvatarData {
             id: 'default',
             name: 'Default',
             content: () =>
-                '<gh-avatar-webcomponent app-id="{{appId}}" item-id="{{itemId}}" field-id="{{fieldId}}"></gh-avatar-webcomponent>'
+                '<gh-avatar-webcomponent app-id="{{appId}}" item-id="{{itemId}}" images-fields-id="{{field_model.data_model.images_field_id}}"></gh-avatar-webcomponent>'
         },{
           id: 'medium',
           name: 'Medium',
           content: () =>
-              '<gh-avatar-webcomponent class="medium" app-id="{{appId}}" item-id="{{itemId}}" field-id="{{fieldId}}"></gh-avatar-webcomponent>'
+              '<gh-avatar-webcomponent class="medium" app-id="{{appId}}" item-id="{{itemId}}" images-fields-id="{{field_model.data_model.images_field_id}}"></gh-avatar-webcomponent>'
         },{
           id: 'small',
           name: 'Small',
           content: () =>
-              '<gh-avatar-webcomponent class="small" app-id="{{appId}}" item-id="{{itemId}}" field-id="{{fieldId}}"></gh-avatar-webcomponent>'
+              '<gh-avatar-webcomponent class="small" app-id="{{appId}}" item-id="{{itemId}}" images-fields-id="{{field_model.data_model.images_field_id}}"></gh-avatar-webcomponent>'
         }];
     }
 

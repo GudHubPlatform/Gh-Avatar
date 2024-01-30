@@ -15,22 +15,38 @@ class GhAvatar extends GhHtmlElement {
         this.bgClass;
     }
 
+    async imageFieldUpdate(event, value) {
+        await this.getAvatar();
+        super.render(html);
+    }
+
+    addListenerToImageFields() {
+        if(this.imageFieldsId) {
+            const imageFieldIdArray = this.imageFieldsId.split(',');
+
+            for(let i = 0; i < imageFieldIdArray.length; i++) {
+                let fieldId = imageFieldIdArray[i];
+                gudhub.on('gh_value_update', {app_id: this.appId, item_id: this.itemId, field_id: fieldId}, this.imageFieldUpdate.bind(this));
+            }
+        }
+    }
+
     async onInit() {
         await this.getAttributes();
 
-        if(!this.model || !this.model.data_model.images_field_id) {
-            
-            this.url = this.getAttribute('url');
-            this.name = this.getAttribute('name');
+        this.addListenerToImageFields();
 
-            if(this.url && this.name) {
-                this.generateClassForName();
-                super.render(html);
-            } else {
-                const iconsStorage = gudhub.ghconstructor.angularInjector.get('iconsStorage');
-                const svg = iconsStorage.getIcon("user", "a0a7ad", "40px");
-                super.render(svg);
-            }
+        if(this.url && this.name) {
+            this.generateClassForName();
+            super.render(html);
+            return;
+        }
+
+        if(!this.model || !this.imageFieldsId) {
+
+            const iconsStorage = gudhub.ghconstructor.angularInjector.get('iconsStorage');
+            const svg = iconsStorage.getIcon("user", "a0a7ad", "40px");
+            super.render(svg);
 
             return;
         }
@@ -44,6 +60,10 @@ class GhAvatar extends GhHtmlElement {
         this.appId = this.getAttribute('app-id') || this.scope.appId;
         this.itemId = this.getAttribute('item-id') || this.scope.itemId;
         this.fieldId = this.getAttribute('field-id') || this.scope.fieldId;
+        this.imageFieldsId = this.getAttribute('images-fields-id');
+        this.url = this.getAttribute('url');
+        this.name = this.getAttribute('name');
+
         if(this.appId && this.fieldId) {
             this.model = await gudhub.getField(this.appId, this.fieldId);
         }
@@ -55,7 +75,7 @@ class GhAvatar extends GhHtmlElement {
 
         if(this.model) {
 
-            const imageFieldIds = this.model.data_model.images_field_id.split(',');
+            const imageFieldIds = this.imageFieldsId.split(',');
             for(let i = 0; i < imageFieldIds.length; i++) {
                 let imageFieldId = imageFieldIds[i];
 
@@ -66,7 +86,10 @@ class GhAvatar extends GhHtmlElement {
             }
 
             this.name = await gudhub.getInterpretationById(this.appId, this.itemId, this.model.data_model.user_name_field_id, "value");
-            this.generateClassForName();
+
+            if(this.name) {
+                this.generateClassForName();
+            }
         }
     }
 
@@ -79,6 +102,17 @@ class GhAvatar extends GhHtmlElement {
         };
 
         this.bgClass = `bg-${colors[Math.abs((nameHashCode % colors.length))]}`;
+    }
+
+    disconnectedCallback() {
+        if(this.imageFieldsId) {
+            const imageFieldIdArray = this.imageFieldsId.split(',');
+
+            for(let i = 0; i < imageFieldIdArray.length; i++) {
+                let fieldId = imageFieldIdArray[i];
+                gudhub.destroy('gh_value_update', {app_id: this.appId, item_id: this.itemId, field_id: fieldId}, this.imageFieldUpdate.bind(this));
+            }
+        }
     }
 }
 
